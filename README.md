@@ -9,6 +9,7 @@ available in 1.12.2 of mods like PeripheralsPlusOne.
 
 
 Current new methods to computercraft:
+how to read this list: methodname(params):result
 
 listCraftableItems() for refined storage pheriperal: table 
 
