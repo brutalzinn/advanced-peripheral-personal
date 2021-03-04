@@ -67,14 +67,38 @@ public class RsBridgePeripheral extends BasePeripheral {
         }
         return new Object[]{items};
     }
-
+    @LuaFunction(mainThread = true)
+    public final Object[] listCraftingItems() {
+        HashMap<Integer, Object> items = new HashMap<>();
+        int i = 1;
+        for (ICraftingTask task : getNetwork().getCraftingManager().getTasks()) {
+            ItemStack stack = task.getRequested().getItem();
+            HashMap<String, Object> map = new HashMap<>();
+            CompoundNBT nbt = stack.getTag();
+            map.put("name", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
+            map.put("craftamount", stack.getCount()); //Returns the result amount of an crafting recipe
+            for (ItemStack oStack : RefinedStorage.getItems(getNetwork(), false)) { //Used to get the amount of the item
+                if (oStack.isItemEqual(stack)) {
+                    map.put("amount", oStack.getCount());
+                    break;
+                } else {
+                    map.put("amount", 0);
+                }
+            }
+            map.put("displayName", stack.getDisplayName().getString());
+            if (nbt != null && !nbt.isEmpty()) {
+                map.put("nbt", nbt.toString());
+            }
+            items.put(i, map);
+            i++;
+        }
+        return new Object[]{items};
+    }
     @LuaFunction(mainThread = true)
     public final Object[] listCraftableItems() {
         HashMap<Integer, Object> items = new HashMap<>();
         int i = 1;
-     //   for (ItemStack stack : RefinedStorage.getItems(getNetwork(), true)) {
-        for ( ICraftingTask task : getNetwork().getCraftingManager().getTasks()) {
-            ItemStack stack = task.getRequested().getItem();
+        for (ItemStack stack : RefinedStorage.getItems(getNetwork(), true)) {
             HashMap<String, Object> map = new HashMap<>();
             CompoundNBT nbt = stack.getTag();
             map.put("name", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
