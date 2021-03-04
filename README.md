@@ -18,7 +18,11 @@ Connect(String databaseLink,String username, String password): bool
 
 Current feature in development:
 
-MysqlBridge peripheral 
+sqlBridge peripheral 
+
+What we need at this moment:
+
+A texture for SqlBridge peripheral
 
 Documentation: https://docs.srendi.de
 
