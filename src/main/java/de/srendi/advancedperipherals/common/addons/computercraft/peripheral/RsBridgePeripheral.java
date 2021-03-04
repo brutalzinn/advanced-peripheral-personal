@@ -72,7 +72,9 @@ public class RsBridgePeripheral extends BasePeripheral {
     public final Object[] listCraftableItems() {
         HashMap<Integer, Object> items = new HashMap<>();
         int i = 1;
-        for (ItemStack stack : RefinedStorage.getItems(getNetwork(), true)) {
+     //   for (ItemStack stack : RefinedStorage.getItems(getNetwork(), true)) {
+        for ( ICraftingTask task : getNetwork().getCraftingManager().getTasks()) {
+            ItemStack stack = task.getRequested().getItem();
             HashMap<String, Object> map = new HashMap<>();
             CompoundNBT nbt = stack.getTag();
             map.put("name", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
