@@ -12,9 +12,9 @@ Current new methods to computercraft:
 
 listCraftableItems() for refined storage pheriperal
 
-Next feature:
+Current feature in development:
 
-Mysql Block - I think it's very cool uses mysql in minecraft. This can usefull to build a proxy between my itens in Minecraft to a small front end integration.
+MysqlBridge peripheral 
 
 Documentation: https://docs.srendi.de
 
