@@ -34,6 +34,7 @@ public class ConnectionFactory {
 
 public Connection createConnectionToMySql() throws ClassNotFoundException, SQLException {
     Class.forName("com.mysql.cj.jdbc.Driver");
+
 Connection connection = DriverManager.getConnection(this.database_url,this.username,this.password);
 return connection;
 }

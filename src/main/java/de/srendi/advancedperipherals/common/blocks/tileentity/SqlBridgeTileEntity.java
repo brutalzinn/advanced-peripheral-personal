@@ -19,7 +19,7 @@ public class SqlBridgeTileEntity extends PeripheralTileEntity<SqlBridgePeriphera
 
     @Override
     protected SqlBridgePeripheral createPeripheral() {
-        return new SqlBridgePeripheral("chatBox", this);
+        return new SqlBridgePeripheral("sqlBridge", this);
     }
 
 

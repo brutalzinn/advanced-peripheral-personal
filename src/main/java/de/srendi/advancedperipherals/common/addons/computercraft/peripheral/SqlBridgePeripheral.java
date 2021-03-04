@@ -29,6 +29,7 @@ private static ConnectionFactory factory;
     public boolean isEnabled() {
         return AdvancedPeripheralsConfig.enableSqlBridge;
     }
+
     @LuaFunction(mainThread = true)
     public final boolean Connect(String data_url,String username, String password) {
         ConnectionFactory factory_db = new ConnectionFactory();

@@ -35,7 +35,6 @@ public class AdvancedPeripherals {
     public AdvancedPeripherals() {
         LOGGER.info("AdvancedPeripherals says hello!");
         IEventBus modBus = FMLJavaModLoadingContext.get().getModEventBus();
-
         ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, ConfigHolder.COMMON_SPEC);
         MinecraftForge.EVENT_BUS.addListener(this::onWorldLoad);
         modBus.addListener(ConfigHandler::configEvent);
