@@ -10,7 +10,9 @@ available in 1.12.2 of mods like PeripheralsPlusOne.
 
 Current new methods to computercraft:
 
-listCraftableItems() for refined storage pheriperal
+listCraftableItems() for refined storage pheriperal: table
+Query(string sql query) for sql bridge pheriperal: table
+Connect(String databaseLink,String username, String password): bool
 
 Current feature in development:
 
