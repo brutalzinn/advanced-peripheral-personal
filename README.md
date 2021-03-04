@@ -25,5 +25,5 @@ What we need at this moment:
 
 A texture for SqlBridge peripheral
 
-Documentation: https://docs.srendi.de
+Original Documentation: https://docs.srendi.de
 
