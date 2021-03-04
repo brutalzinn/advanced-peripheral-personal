@@ -102,7 +102,8 @@ dependencies {
     implementation fg.deobf("com.refinedmods:refinedstorage:${rs_version}")
     compileOnly fg.deobf("appeng:appliedenergistics2:${ae_version}:api");
     runtimeOnly fg.deobf("appeng:appliedenergistics2:${ae_version}");
-
+    compile group: 'mysql', name: 'mysql-connector-java', version: '8.0.15'
+    runtime "mysql:mysql-connector-java:8.0.15"
     //Mods to test stuff(Not required mods)
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.19.446")
     runtimeOnly fg.deobf("mekanism:Mekanism:1.16.4-10.0.19.446:generators")
