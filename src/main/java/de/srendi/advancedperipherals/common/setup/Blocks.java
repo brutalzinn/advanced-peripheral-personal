@@ -12,6 +12,8 @@ import java.util.function.Supplier;
 public class Blocks {
 
     public static final RegistryObject<Block> ENVIRONMENT_DETECTOR = register("environment_detector", EnvironmentDetector::new);
+    public static final RegistryObject<Block> SQL_BRIDGE = register("sql_bridge", SqlBridge::new);
+
     public static final RegistryObject<Block> CHAT_BOX = register("chat_box", ChatBox::new);
     public static final RegistryObject<Block> PLAYER_DETECTOR = register("player_detector", PlayerDetectorBlock::new);
     public static final RegistryObject<Block> ME_BRIDGE = register("me_bridge", MeBridge::new);
