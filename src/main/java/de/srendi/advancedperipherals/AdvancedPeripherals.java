@@ -1,5 +1,6 @@
 package de.srendi.advancedperipherals;
 
+import de.srendi.advancedperipherals.common.blocks.RsBridge;
 import de.srendi.advancedperipherals.common.configuration.AdvancedPeripheralsConfig;
 import de.srendi.advancedperipherals.common.configuration.ConfigHandler;
 import de.srendi.advancedperipherals.common.configuration.ConfigHolder;

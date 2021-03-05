@@ -1,39 +1,48 @@
 package de.srendi.advancedperipherals.common.addons.computercraft.peripheral;
 
+import com.refinedmods.refinedstorage.api.autocrafting.ICraftingManager;
+import com.refinedmods.refinedstorage.api.autocrafting.craftingmonitor.ICraftingMonitorListener;
 import com.refinedmods.refinedstorage.api.autocrafting.task.CalculationResultType;
 import com.refinedmods.refinedstorage.api.autocrafting.task.ICalculationResult;
 import com.refinedmods.refinedstorage.api.autocrafting.task.ICraftingTask;
 import com.refinedmods.refinedstorage.api.network.INetwork;
+import com.refinedmods.refinedstorage.api.network.node.INetworkNode;
 import com.refinedmods.refinedstorage.api.util.Action;
+import com.refinedmods.refinedstorage.apiimpl.API;
 import dan200.computercraft.api.lua.LuaException;
 import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import de.srendi.advancedperipherals.common.addons.refinedstorage.RefinedStorage;
 import de.srendi.advancedperipherals.common.addons.refinedstorage.RefinedStorageNode;
+import de.srendi.advancedperipherals.common.blocks.tileentity.ChatBoxTileEntity;
 import de.srendi.advancedperipherals.common.blocks.tileentity.RsBridgeTileEntity;
 import de.srendi.advancedperipherals.common.configuration.AdvancedPeripheralsConfig;
+import de.srendi.advancedperipherals.common.util.ListUtil;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
+import net.minecraftforge.event.TickEvent;
+import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemHandlerHelper;
 import net.minecraftforge.registries.ForgeRegistries;
+import org.jetbrains.annotations.NotNull;
 
-import java.util.HashMap;
-import java.util.Locale;
+import java.util.*;
 
 public class RsBridgePeripheral extends BasePeripheral {
 
     private final RsBridgeTileEntity tileEntity;
-
+private boolean addedListener = false;
     public RsBridgePeripheral(String type, RsBridgeTileEntity tileEntity) {
         super(type, tileEntity);
         this.tileEntity = tileEntity;
+
     }
 
     private RefinedStorageNode getNode() {
@@ -47,6 +56,53 @@ public class RsBridgePeripheral extends BasePeripheral {
     @Override
     public boolean isEnabled() {
         return AdvancedPeripheralsConfig.enableRsBridge;
+    }
+    @Override
+public void attach(@NotNull IComputerAccess computer){
+        connectedComputers.add(computer);
+        onInit();
+    }
+
+    public void onInit() {
+        ICraftingManager manager = getNetwork().getCraftingManager();
+        RsBridgePeripheral.FirstClass first = new RsBridgePeripheral.FirstClass();
+        if (manager != null && !addedListener) {
+            manager.addListener(first);
+            this.addedListener = true;
+
+        } else if (manager == null && addedListener) {
+            this.addedListener = false;
+        }
+    }
+
+    class FirstClass implements ICraftingMonitorListener {
+       private ItemStack lastElement;
+
+        @Override
+        public void onAttached() {
+            System.out.println("Attrached..");
+        }
+
+        @Override
+        public void onChanged() {
+
+            RsBridgeTileEntity entity = (RsBridgeTileEntity) tileEntity;
+
+            for (ICraftingTask task : entity.getNode().getNetwork().getCraftingManager().getTasks()) {
+                ItemStack stack = task.getRequested().getItem();
+
+                lastElement = stack;
+            }
+            System.out.print("crafiting.. :" + lastElement.getDisplayName().getString());
+
+//            ItemStack stack = lastElement.getRequested().getItem();
+
+//            for (IComputerAccess computer : entity.getConnectedComputers()) {
+//                computer.queueEvent("rscrafting", stack.getDisplayName().getString());
+//            }
+
+
+        }
     }
 
     @LuaFunction(mainThread = true)
