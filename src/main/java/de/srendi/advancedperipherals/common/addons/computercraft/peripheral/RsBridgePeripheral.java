@@ -71,12 +71,13 @@ public void attach(@NotNull IComputerAccess computer){
             this.addedListener = true;
 
         } else if (manager == null && addedListener) {
+            manager.removeListener(first);
             this.addedListener = false;
         }
     }
 
     class FirstClass implements ICraftingMonitorListener {
-       private ItemStack lastElement;
+       private ICraftingTask lastElement;
 
         @Override
         public void onAttached() {
@@ -85,21 +86,9 @@ public void attach(@NotNull IComputerAccess computer){
 
         @Override
         public void onChanged() {
-
             RsBridgeTileEntity entity = (RsBridgeTileEntity) tileEntity;
+          System.out.print(getNetwork().getCraftingManager().getTasks().);
 
-            for (ICraftingTask task : entity.getNode().getNetwork().getCraftingManager().getTasks()) {
-                ItemStack stack = task.getRequested().getItem();
-
-                lastElement = stack;
-            }
-            System.out.print("crafiting.. :" + lastElement.getDisplayName().getString());
-
-//            ItemStack stack = lastElement.getRequested().getItem();
-
-//            for (IComputerAccess computer : entity.getConnectedComputers()) {
-//                computer.queueEvent("rscrafting", stack.getDisplayName().getString());
-//            }
 
 
         }
