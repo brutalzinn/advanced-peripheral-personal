@@ -50,7 +50,7 @@ private static ConnectionFactory factory;
         }
     }
     @LuaFunction(mainThread = true)
-    public final boolean Query(String sql) {
+    public final boolean queryExec(String sql) {
         Connection conn = null;
         PreparedStatement prepareStament = null;
         try {
@@ -66,7 +66,7 @@ private static ConnectionFactory factory;
         }
     }
     @LuaFunction(mainThread = true)
-    public final Object[] QueryResult(String sql) {
+    public final Object[] queryResult(String sql) {
         Connection conn = null;
         PreparedStatement prepareStament = null;
         HashMap<Integer, Object> items = new HashMap<>();

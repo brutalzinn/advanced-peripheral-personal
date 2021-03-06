@@ -66,7 +66,7 @@ public void attach(@NotNull IComputerAccess computer){
 
     public void onInit() {
         ICraftingManager manager = getNetwork().getCraftingManager();
-        RsBridgePeripheral.FirstClass first = new RsBridgePeripheral.FirstClass();
+        RsBridgePeripheral.ICrafting first = new RsBridgePeripheral.ICrafting();
         if (manager != null && !addedListener) {
             manager.addListener(first);
             this.addedListener = true;
@@ -77,7 +77,7 @@ public void attach(@NotNull IComputerAccess computer){
         }
     }
 
-    class FirstClass implements ICraftingMonitorListener {
+    class ICrafting implements ICraftingMonitorListener {
        private ItemStack lastElement;
 
         @Override
