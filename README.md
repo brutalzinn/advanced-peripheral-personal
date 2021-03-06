@@ -10,21 +10,16 @@ available in 1.12.2 of mods like PeripheralsPlusOne.
 
 Current new methods to computercraft:
 
-how to read this list: methodname(params):result
+how to read this list: methodname(params):return
 
 listCraftableItems() for refined storage pheriperal: table 
 
-Query(string sql query) for sql bridge pheriperal: table
+QueryResult(string sql query) for sql bridge pheriperal: table
+
+Query(string sql query)for sql bridge pheriperal: boolean
 
 Connect(String databaseLink,String username, String password): bool
 
-Current feature in development:
-
-sqlBridge peripheral 
-
-What we need at this moment:
-
-A texture for SqlBridge peripheral
 
 Original Documentation: https://docs.srendi.de
 
