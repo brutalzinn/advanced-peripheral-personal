@@ -40,11 +40,9 @@ private static ConnectionFactory factory;
         try {
             factory_db.createConnectionToMySql();
             factory = factory_db;
-            System.out.print("connected to mysql");
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
-            System.out.print("Error with mysql connection.");
             return false;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
@@ -52,12 +50,27 @@ private static ConnectionFactory factory;
         }
     }
     @LuaFunction(mainThread = true)
-    public final Object[] Query(String sql) {
+    public final boolean Query(String sql) {
+        Connection conn = null;
+        PreparedStatement prepareStament = null;
+        try {
+            prepareStament = factory.createConnectionToMySql().prepareStatement(sql);
+           prepareStament.executeQuery();
+            return true;
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+            return false;
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+    @LuaFunction(mainThread = true)
+    public final Object[] QueryResult(String sql) {
         Connection conn = null;
         PreparedStatement prepareStament = null;
         HashMap<Integer, Object> items = new HashMap<>();
         Map<String, Object> row = new HashMap<>();
-
         try {
             prepareStament = factory.createConnectionToMySql().prepareStatement(sql);
             ResultSet rs = prepareStament.executeQuery();
@@ -72,9 +85,7 @@ private static ConnectionFactory factory;
                     Object colVal = rs.getObject(i);
                     row.put(colName, colVal);
                 }
-
             }
-
             return new Object[]{row};
         } catch (SQLException throwables) {
             throwables.printStackTrace();
