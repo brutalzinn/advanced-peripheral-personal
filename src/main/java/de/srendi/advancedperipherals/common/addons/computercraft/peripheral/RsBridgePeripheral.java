@@ -97,10 +97,14 @@ public void attach(@NotNull IComputerAccess computer){
                 int count = stack.getCount();
 
 
-                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount() ) {
+                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount()) {
                     lastElement = null;
+                    for (IComputerAccess computer : entity.getConnectedComputers()) {
+                        computer.queueEvent("rs_crafting", name, count);
+                    }
                     return;
                 }
+
                     System.out.println("T:"+ name + " | " +count);
 
                 lastElement = stack;
