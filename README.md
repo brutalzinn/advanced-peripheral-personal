@@ -1,3 +1,4 @@
+
 # AdvancedPeripherals
 
 ![Logo](https://www.bisecthosting.com/images/CF/Advanced_Peripherals/BH_AP_Header.png "Logo")
@@ -10,13 +11,20 @@ available in 1.12.2 of mods like PeripheralsPlusOne.
 
 Current new methods to computercraft:
 
-how to read this list: methodname(params):return
+
+New events to computercraft:
+
+| Event       | Name        | Parameter 1 | Parameter 2 | Description                                                  |
+|-------------|-------------|-------------|-------------|--------------------------------------------------------------|
+| rs_crafting | rs_crafting | String name | int count   | Fires when a new crafting request in refined storage network |
+
+> How to read this list: methodname(params):return
 
 listCraftableItems() for refined storage pheriperal: table 
 
-QueryResult(string sql query) for sql bridge pheriperal: table
+queryResult(string sql query) for sql bridge pheriperal: table
 
-Query(string sql query)for sql bridge pheriperal: boolean
+queryExec(string sql query)for sql bridge pheriperal: boolean
 
 Connect(String databaseLink,String username, String password): bool
 
