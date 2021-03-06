@@ -96,7 +96,9 @@ public void attach(@NotNull IComputerAccess computer){
 
                 int count = stack.getCount();
 
-                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount()) {
+
+                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount() ) {
+                    lastElement = null;
                     return;
                 }
                     System.out.println("T:"+ name + " | " +count);
