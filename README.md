@@ -5,6 +5,7 @@
 
 # advanced-peripheral-personal
 
+[This repository is a clone of AdvancedPeripherals](https://github.com/Seniorendi/AdvancedPeripherals)
 This is my small implementation to advanced peripheral mod. Advanced Peripherals is a mod that adds many useful extensions for ComputerCraft. The mod aims to add features that were
 available in 1.12.2 of mods like PeripheralsPlusOne.
 
