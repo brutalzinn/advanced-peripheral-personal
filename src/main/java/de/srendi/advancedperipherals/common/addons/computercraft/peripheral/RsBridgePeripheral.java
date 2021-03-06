@@ -19,6 +19,7 @@ import de.srendi.advancedperipherals.common.blocks.tileentity.ChatBoxTileEntity;
 import de.srendi.advancedperipherals.common.blocks.tileentity.RsBridgeTileEntity;
 import de.srendi.advancedperipherals.common.configuration.AdvancedPeripheralsConfig;
 import de.srendi.advancedperipherals.common.util.ListUtil;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.tileentity.TileEntity;
@@ -77,7 +78,7 @@ public void attach(@NotNull IComputerAccess computer){
     }
 
     class FirstClass implements ICraftingMonitorListener {
-       private ICraftingTask lastElement;
+       private ItemStack lastElement;
 
         @Override
         public void onAttached() {
@@ -87,10 +88,22 @@ public void attach(@NotNull IComputerAccess computer){
         @Override
         public void onChanged() {
             RsBridgeTileEntity entity = (RsBridgeTileEntity) tileEntity;
-          System.out.print(getNetwork().getCraftingManager().getTasks().);
 
+            for (ICraftingTask task : getNetwork().getCraftingManager().getTasks()) {
 
+                ItemStack stack = task.getRequested().getItem();
+ String name = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
 
+                int count = stack.getCount();
+
+                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount()) {
+                    return;
+                }
+                    System.out.println("T:"+ name + " | " +count);
+
+                lastElement = stack;
+
+            }
         }
     }
 
@@ -101,6 +114,7 @@ public void attach(@NotNull IComputerAccess computer){
         for (ItemStack stack : RefinedStorage.getItems(getNetwork(), false)) {
             HashMap<String, Object> map = new HashMap<>();
             CompoundNBT nbt = stack.getTag();
+
             map.put("name", ForgeRegistries.ITEMS.getKey(stack.getItem()).toString());
             map.put("amount", stack.getCount());
             map.put("displayName", stack.getDisplayName().getString());
