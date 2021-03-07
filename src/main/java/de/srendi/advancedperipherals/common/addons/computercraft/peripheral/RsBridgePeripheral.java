@@ -14,6 +14,7 @@ import dan200.computercraft.api.lua.LuaFunction;
 import dan200.computercraft.api.peripheral.IComputerAccess;
 import dan200.computercraft.api.peripheral.IPeripheral;
 import de.srendi.advancedperipherals.common.addons.refinedstorage.RefinedStorage;
+import de.srendi.advancedperipherals.common.addons.refinedstorage.RefinedStorageEvent;
 import de.srendi.advancedperipherals.common.addons.refinedstorage.RefinedStorageNode;
 import de.srendi.advancedperipherals.common.blocks.tileentity.ChatBoxTileEntity;
 import de.srendi.advancedperipherals.common.blocks.tileentity.RsBridgeTileEntity;
@@ -66,50 +67,14 @@ public void attach(@NotNull IComputerAccess computer){
 
     public void onInit() {
         ICraftingManager manager = getNetwork().getCraftingManager();
-        RsBridgePeripheral.ICrafting first = new RsBridgePeripheral.ICrafting();
+        RefinedStorageEvent event = new RefinedStorageEvent(getNetwork(),tileEntity);
         if (manager != null && !addedListener) {
-            manager.addListener(first);
+            manager.addListener(event);
             this.addedListener = true;
 
         } else if (manager == null && addedListener) {
-            manager.removeListener(first);
+            manager.removeListener(event);
             this.addedListener = false;
-        }
-    }
-
-    class ICrafting implements ICraftingMonitorListener {
-       private ItemStack lastElement;
-
-        @Override
-        public void onAttached() {
-            System.out.println("Attrached..");
-        }
-
-        @Override
-        public void onChanged() {
-            RsBridgeTileEntity entity = (RsBridgeTileEntity) tileEntity;
-
-            for (ICraftingTask task : getNetwork().getCraftingManager().getTasks()) {
-
-                ItemStack stack = task.getRequested().getItem();
- String name = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
-
-                int count = stack.getCount();
-
-
-                if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount()) {
-                    lastElement = null;
-                    for (IComputerAccess computer : entity.getConnectedComputers()) {
-                        computer.queueEvent("rs_crafting", name, count);
-                    }
-                    return;
-                }
-
-                    System.out.println("T:"+ name + " | " +count);
-
-                lastElement = stack;
-
-            }
         }
     }
 
