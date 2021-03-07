@@ -55,7 +55,7 @@ private static ConnectionFactory factory;
         PreparedStatement prepareStament = null;
         try {
             prepareStament = factory.createConnectionToMySql().prepareStatement(sql);
-           prepareStament.executeQuery();
+           prepareStament.execute();
             return true;
         } catch (SQLException throwables) {
             throwables.printStackTrace();
