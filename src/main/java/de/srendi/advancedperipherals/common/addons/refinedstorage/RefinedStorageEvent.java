@@ -32,11 +32,9 @@ public class RefinedStorageEvent implements ICraftingMonitorListener {
             ItemStack stack = task.getRequested().getItem();
             String name = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
             int count = stack.getCount();
-
             if(lastElement != null && lastElement.getId() == task.getId()) {
                 return;
             }
-
             for (IComputerAccess computer : entity.getConnectedComputers()) {
                 computer.queueEvent("rs_crafting", name, count);
             }
