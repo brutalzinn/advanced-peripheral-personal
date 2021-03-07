@@ -11,14 +11,14 @@ import net.minecraft.item.ItemStack;
 import net.minecraftforge.registries.ForgeRegistries;
 
 public class RefinedStorageEvent implements ICraftingMonitorListener {
-    private ItemStack lastElement;
+    private ICraftingTask lastElement;
     private INetwork network;
     private RsBridgeTileEntity tileEntity;
     public RefinedStorageEvent(INetwork network, RsBridgeTileEntity tileEntity) {
         this.network = network;
         this.tileEntity = tileEntity;
     }
-    
+
     @Override
     public void onAttached() {
         System.out.println("Attrached..");
@@ -27,20 +27,20 @@ public class RefinedStorageEvent implements ICraftingMonitorListener {
     @Override
     public void onChanged() {
 
-        RsBridgeTileEntity entity = (RsBridgeTileEntity) tileEntity;
+        RsBridgeTileEntity entity = tileEntity;
         for (ICraftingTask task : network.getCraftingManager().getTasks()) {
             ItemStack stack = task.getRequested().getItem();
             String name = ForgeRegistries.ITEMS.getKey(stack.getItem()).toString();
             int count = stack.getCount();
-            if(lastElement != null  && Item.getIdFromItem(stack.getItem()) == Item.getIdFromItem(lastElement.getItem()) && count == lastElement.getCount()) {
-                lastElement = null;
-                for (IComputerAccess computer : entity.getConnectedComputers()) {
-                    computer.queueEvent("rs_crafting", name, count);
-                }
+
+            if(lastElement != null && lastElement.getId() == task.getId()) {
                 return;
             }
 
-            lastElement = stack;
+            for (IComputerAccess computer : entity.getConnectedComputers()) {
+                computer.queueEvent("rs_crafting", name, count);
+            }
+            lastElement = task;
         }
     }
 }
