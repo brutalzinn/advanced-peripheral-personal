@@ -27,7 +27,7 @@ New refined storage pheriperal methods:
 
 listCraftableItems() for refined storage pheriperal: table 
 
->New block Sql Bridge -> You can execute queries to mysql directily from minecraft!
+New block Sql Bridge -> You can execute queries to mysql directily from minecraft!
 
 Sql Bridge methods:
 
