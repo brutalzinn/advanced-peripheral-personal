@@ -13,8 +13,9 @@ available in 1.12.2 of mods like PeripheralsPlusOne.
 
 Current new methods to computercraft:
 
+Refined Storage implementation
 
-New events to computercraft:
+New events to refined storage pheriperal:
 
 | Event       | Name        | Parameter 1 | Parameter 2 | Description                                                  |
 |-------------|-------------|-------------|-------------|--------------------------------------------------------------|
@@ -22,13 +23,20 @@ New events to computercraft:
 
 > How to read this list: methodname(params):return
 
+New refined storage pheriperal addon: 
+
 listCraftableItems() for refined storage pheriperal: table 
+
+>New block Sql Bridge.
+You can execute queries to mysql directily from minecraft!
+
+Sql Bridge methods:
+
+Connect(String databaseLink,String username, String password): bool
 
 queryResult(string sql query) for sql bridge pheriperal: table
 
 queryExec(string sql query)for sql bridge pheriperal: boolean
-
-Connect(String databaseLink,String username, String password): bool
 
 
 Original Documentation: https://docs.srendi.de
