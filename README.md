@@ -27,7 +27,7 @@ New refined storage pheriperal methods:
 | Method | Block | Return | Description |
 |-------------|-------------|-------------|-------------|
 | listCraftingItems() | rsBridge | table | return list with all crafting in execution |
-| Connect(String databaseLink,String username, String password) | SqlBridge | boolean | return list with all crafting in execution |
+| Connect(String databaseLink,String username, String password) | SqlBridge | boolean |  return boolean if sucess or false if gets error  |
 | queryResult(string sql query) | SqlBridge | table | return a table with sql return |
 | queryExec(string sql query) | SqlBridge | boolean | return boolean if sucess or false if gets error |
 
