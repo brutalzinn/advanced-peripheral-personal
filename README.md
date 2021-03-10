@@ -22,7 +22,7 @@ New events to refined storage pheriperal:
 | rs_crafting | rs_crafting | String name | int count   | Fires when a new crafting request in refined storage network |
 
 
-New refined storage pheriperal methods: 
+New methods to computercraft
 
 | Method | Block | Return | Description |
 |-------------|-------------|-------------|-------------|
