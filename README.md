@@ -11,9 +11,6 @@ This is my small implementation to advanced peripheral mod. Advanced Peripherals
 available in 1.12.2 of mods like PeripheralsPlusOne.
 
 
-Current new methods to computercraft:
-
-Refined Storage implementation
 
 New events to refined storage pheriperal:
 
@@ -22,7 +19,7 @@ New events to refined storage pheriperal:
 | rs_crafting | rs_crafting | String name | int count   | Fires when a new crafting request in refined storage network |
 
 
-New methods to computercraft
+New methods to computercraft:
 
 | Method | Block | Return | Description |
 |-------------|-------------|-------------|-------------|
